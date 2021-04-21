@@ -151,10 +151,18 @@ function getAnimalSpecies() {
   return locations;
 }
 
-function getAnimalNames(animalName, sorted) {
-  const nameArray = animals.find((animal) => (
+function getAnimalNames(animalName, sorted, sex) {
+  let nameArray = animals.find((animal) => (
     animal.name === animalName
   )).residents.map((resident) => resident.name);
+
+  if (sex) {
+    nameArray = animals.find((animal) => (
+      animal.name === animalName
+    )).residents.filter((resident) => (
+      resident.sex === sex
+    )).map((resident) => resident.name);
+  }
 
   if (sorted) {
     nameArray.sort();
@@ -163,11 +171,11 @@ function getAnimalNames(animalName, sorted) {
   return nameArray;
 }
 
-function animalWithNames({ sorted = false }) {
+function animalWithNames({ sorted = false, sex = false }) {
   const locations = getLocation();
 
   animals.map((animal) => locations[animal.location].push({
-    [animal.name]: getAnimalNames(animal.name, sorted),
+    [animal.name]: getAnimalNames(animal.name, sorted, sex),
   }));
 
   return locations;
