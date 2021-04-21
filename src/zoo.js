@@ -186,7 +186,7 @@ function animalWithNames({ sorted = false, sex = false }) {
 function animalMap(options = false) {
   // seu código aqui
 
-  if (options) return animalWithNames(options);
+  if (options.includeNames) return animalWithNames(options);
 
   return getAnimalSpecies();
 }
