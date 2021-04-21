@@ -151,30 +151,34 @@ function getAnimalSpecies() {
   return locations;
 }
 
-function getAnimalNames(animalName) {
-  const nameArray = animals.find((animal) =>
-    animal.name === animalName).residents.map((resident) => resident.name);
-  // console.log(nameArray);
+function getAnimalNames(animalName, sorted) {
+  const nameArray = animals.find((animal) => (
+    animal.name === animalName
+  )).residents.map((resident) => resident.name);
+
+  if (sorted) {
+    nameArray.sort();
+  }
 
   return nameArray;
 }
 
-function animalWithNames() {
+function animalWithNames({ sorted = false }) {
   const locations = getLocation();
+
   animals.map((animal) => locations[animal.location].push({
-    [animal.name]: getAnimalNames(animal.name),
+    [animal.name]: getAnimalNames(animal.name, sorted),
   }));
 
   return locations;
 }
-const f = animalWithNames();
-console.log(f);
+// const f = animalWithNames();
+// console.log(f);
 
 function animalMap(options = false) {
   // seu código aqui
-  const { includeNames } = options;
 
-  if (includeNames) return animalWithNames();
+  if (options) return animalWithNames(options);
 
   return getAnimalSpecies();
 }
