@@ -135,7 +135,7 @@ function entryCalculator(entrants) {
 
 // Requirement 9
 // I took this ideia from https://stackoverflow.com/questions/33381583/how-to-add-many-values-to-one-key-in-javascript-object/33382321
-/* function getLocation() {
+function getLocation() {
   const locations = {};
   animals.forEach((animal) => {
     locations[animal.location] = [];
@@ -144,36 +144,42 @@ function entryCalculator(entrants) {
   return locations;
 }
 
-function getAnimalNames() {
+function getAnimalSpecies() {
   const locations = getLocation();
   animals.map((animal) => locations[animal.location].push(animal.name));
 
   return locations;
 }
 
-const check = (animal) => (animal.location === 'NE');
+function getAnimalNames(animalName) {
+  const nameArray = animals.find((animal) =>
+    animal.name === animalName).residents.map((resident) => resident.name);
+  // console.log(nameArray);
 
-function nameTrue() {
+  return nameArray;
+}
+
+function animalWithNames() {
   const locations = getLocation();
-  console.log(locations);
-  const keys = Object.keys(locations);
-  console.log(keys);
-  animals.map((animal) => (
-    check(animal) ? locations.NE.push({ [animal.name]: [animal.residents.name] }) : false
-  )); // .push({ locations[animal.name] = [] }));
-  console.log(locations.NE[0]);
+  animals.map((animal) => locations[animal.location].push({
+    [animal.name]: getAnimalNames(animal.name),
+  }));
+
   return locations;
 }
-nameTrue();
-// console.log(nameTrue());
+const f = animalWithNames();
+console.log(f);
 
-function animalMap(options) {
+function animalMap(options = false) {
   // seu código aqui
-  // return getAnimalNames();
-  // return nameTrue();
-}
+  const { includeNames } = options;
 
-// console.log(animalMap()); */
+  if (includeNames) return animalWithNames();
+
+  return getAnimalSpecies();
+}
+// const options = { includeNames: true };
+// console.log(animalMap(options));
 
 // Requirement 10
 // I took this convertion function from https://stackoverflow.com/questions/13898423/javascript-convert-24-hour-time-of-day-string-to-12-hour-time-with-am-pm-and-no
@@ -286,7 +292,7 @@ module.exports = {
   entryCalculator,
   schedule,
   animalCount,
-  // animalMap,
+  animalMap,
   animalsByIds,
   employeeByName,
   employeeCoverage,

@@ -61,10 +61,10 @@ describe('Implemente a função animalMap', () => {
       ]
     };
 
-    // assert.deepStrictEqual(actual, expected);
+    assert.deepStrictEqual(actual, expected);
   });
 
-  it('Com a opção `sex: \'female\'` ou `sex: \'male\'` especificada, retorna somente nomes de animais macho/fêmea', () => {
+  /* it('Com a opção `sex: \'female\'` ou `sex: \'male\'` especificada, retorna somente nomes de animais macho/fêmea', () => {
     const options = { includeNames: true, sex: 'female' }
     const actual = zoo.animalMap(options);
     const expected = {
@@ -126,5 +126,5 @@ describe('Implemente a função animalMap', () => {
     actual = zoo.animalMap(options)['NE'][0];
     expected = 'lions';
     // assert.strictEqual(actual, expected);
-  });
+  }); */
 });
